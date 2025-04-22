@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bot Barbearia</title>
+  <style>
+    body { font-family: Arial; text-align: center; padding: 20px; }
+    input, button { margin: 10px; padding: 10px; width: 200px; }
+    #qr img { max-width: 200px; }
+    #bot { display: none; }
+  </style>
+</head>
+<body>
+  <h1>Bot Barbearia</h1>
+  <div id="login">
+    <input id="username" placeholder="Usuário">
+    <input id="password" type="password" placeholder="Senha">
+    <button onclick="login()">Entrar</button>
+  </div>
+  <div id="bot">
+    <div id="qr"></div>
+    <input id="sender" placeholder="Seu número (ex.: 5511999999999@c.us)">
+    <input id="message" placeholder="Mensagem (ex.: 1 para agendar)">
+    <button onclick="sendMessage()">Enviar</button>
+  </div>
+  <script>
+    async function login() {
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      const response = await fetch('/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      });
+      const data = await response.json();
+      if (data.token) {
+        localStorage.setItem('token', data.token);
+        document.getElementById('login').style.display = 'none';
+        document.getElementById('bot').style.display = 'block';
+        startBot();
+      } else {
+        alert('Usuário ou senha errados');
+      }
+    }
+
+    async function startBot() {
+      const token = localStorage.getItem('token');
+      const response = await fetch('/bot/start', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      const data = await response.json();
+      if (data.qr) {
+        document.getElementById('qr').innerHTML = `<img src="${data.qr}" alt="QR Code">`;
+      }
+    }
+
+    async function sendMessage() {
+      const token = localStorage.getItem('token');
+      const sender = document.getElementById('sender').value;
+      const message = document.getElementById('message').value;
+      const response = await fetch('/bot/message', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ sender, message })
+      });
+      const data = await response.json();
+      alert(data.message);
+    }
+  </script>
+</body>
+</html>
