@@ -1,0 +1,29 @@
+{
+  "name": "barbearia-bot",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GUiDoVRUCO/barbearia-bot.git"
+  },
+  "keywords": ["whatsapp", "bot", "barbearia", "agendamento"],
+  "author": "Seu Nome",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GUiDoVRUCO/barbearia-bot/issues"
+  },
+  "homepage": "https://github.com/GUiDoVRUCO/barbearia-bot#readme",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "node-cron": "^3.0.3",
+    "puppeteer": "^24.6.1",
+    "qrcode-terminal": "^0.12.0",
+    "sqlite3": "^5.1.7",
+    "whatsapp-web.js": "^1.27.0",
+    "winston": "^3.14.2"
+  },
+  "description": "Bot de agendamento para barbearia usando WhatsApp."
+}

@@ -1,0 +1,4 @@
+node_modules/whatsapp-web.js/node_modules/puppeteer-core/.local-chromium/*/chrome-win/chrome.dll filter=lfs diff=lfs merge=lfs -text
+node_modules/whatsapp-web.js/node_modules/puppeteer-core/.local-chromium/*/chrome-win/interactive_ui_tests.exe filter=lfs diff=lfs merge=lfs -text
+node_modules/whatsapp-web.js/node_modules/puppeteer-core/.local-chromium/win64-1045629/chrome-win/chrome.dll filter=lfs diff=lfs merge=lfs -text
+node_modules/whatsapp-web.js/node_modules/puppeteer-core/.local-chromium/win64-1045629/chrome-win/interactive_ui_tests.exe filter=lfs diff=lfs merge=lfs -text
